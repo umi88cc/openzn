@@ -1,0 +1,55 @@
+# AI指南（openzn）— Cloudflare Workers 配置
+# 只用免费层，前期只部署在主号 228522198@qq.com 上
+# 副号 446099815@qq.com 先不用，跑通后再分流（见 README）
+name = "openzn"
+main = "src/index.js"
+compatibility_date = "2026-11-08"
+compatibility_flags = ["nodejs_compat"]
+
+# 静态资源：public/ 下的文件免费不限量，不计入每天 10 万次 Workers 请求
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+# D1 主库（免费层：每个库最大 500MB，账号总计 5GB，最多 10 个库）
+[[d1_databases]]
+binding = "DB"
+database_name = "openzn-db"
+database_id = "REPLACE_WITH_D1_ID_AFTER_CREATE"
+# 创建命令：npx wrangler d1 create openzn-db
+# 建表命令：npx wrangler d1 execute openzn-db --file=src/db/schema.sql
+# 导入种子：npx wrangler d1 execute openzn-db --file=src/db/seed.sql
+
+# KV：只做缓存 / 会话，不存图片、不存余额积分等关键数据
+# 免费层：每天 10 万次读、1000 次写/删、1GB 存储
+[[kv_namespaces]]
+binding = "KV"
+id = "REPLACE_WITH_KV_ID_AFTER_CREATE"
+# 创建命令：npx wrangler kv namespace create OPENZN_KV
+
+# R2 图片仓库（免费层：10GB 存储）：编辑器图库、文章图片放这里；
+# KV 只存图片地址，不存图片本身；前台图片走 /img/:key 代理，不暴露 R2 直链
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "openzn-images"
+# 创建命令：npx wrangler r2 bucket create openzn-images
+# 没建 R2 时编辑器仍可用远程图片地址；图库接口会提示未配置，不报错
+
+# 定时任务：每天 09:00（上海时间）扫描 7 天内到期会员并邮件提醒
+[triggers]
+crons = ["0 1 * * *"]
+
+[vars]
+SITE_NAME = "AI指南"
+SITE_DOMAIN = "openzn.cc"
+# 免费二级域名过渡期间先用 workers.dev，买了 openzn.cc 后改这里并改 Nameserver 到主号
+SITE_URL = "https://openzn.workers.dev"
+ADMIN_QQ = "446099815"
+ADMIN_EMAIL = "qq446099815@gmail.com"
+NOTIFY_EMAIL = "qq446099815@gmail.com"
+NOTIFY_EMAIL_BACKUP = "v998ip@gmail.com"
+QQ_GROUP = "13916509"
+# 发信走 Resend（HTTP），Workers 不能直连 SMTP；免费每天 100 封，前期够用
+# RESEND_API_KEY 通过 wrangler secret 设，不写进仓库：
+#   npx wrangler secret put RESEND_API_KEY

@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "hono": "^4.6.0"
+  },
+  "description": "AI指南（openzn）— OpenClaw / Hermes 部署指南博客，Cloudflare Workers + KV + D1 免费层",
+  "devDependencies": {
+    "wrangler": "^3.99.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "name": "openzn",
+  "private": true,
+  "scripts": {
+    "check": "for f in src/index.js src/lib/*.js src/routes/*.js public/js/*.js; do node --check \"$f\" || exit 1; done && echo OK",
+    "db:create": "wrangler d1 create openzn-db",
+    "db:local": "wrangler d1 execute openzn-db --local --file=src/db/schema.sql",
+    "db:migrate": "wrangler d1 execute openzn-db --file=src/db/schema.sql",
+    "db:seed": "wrangler d1 execute openzn-db --file=src/db/seed.sql",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "db:migrate3": "wrangler d1 execute openzn-db --file=src/db/migrate-phase3.sql",
+    "db:local:migrate3": "wrangler d1 execute openzn-db --local --file=src/db/migrate-phase3.sql",
+    "db:migrate4": "wrangler d1 execute openzn-db --file=src/db/migrate-phase4.sql",
+    "db:local:migrate4": "wrangler d1 execute openzn-db --local --file=src/db/migrate-phase4.sql",
+    "db:migrate5": "wrangler d1 execute openzn-db --file=src/db/migrate-phase5.sql",
+    "db:local:migrate5": "wrangler d1 execute openzn-db --local --file=src/db/migrate-phase5.sql"
+  },
+  "type": "module",
+  "version": "0.5.0"
+}

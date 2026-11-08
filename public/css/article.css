@@ -1,0 +1,70 @@
+/* AI指南 — 文章详情样式（v5，第二期美观打磨）：代码块、锁卡、版权卡片、图片防盗 */
+.article-detail h1{font-size:26px;margin-bottom:6px}
+.article-crumb{color:var(--muted);font-size:14px;margin-bottom:10px}
+.article-crumb a{color:var(--muted)}
+.article-crumb a:hover{color:var(--deep)}
+.article-meta{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;color:var(--muted);font-size:14px;margin:10px 0 4px}
+.article-actions{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap}
+.action-btn{padding:9px 18px;border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font-size:15px;transition:var(--ease)}
+.action-btn:hover{border-color:var(--violet);color:var(--violet);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.action-btn:active{transform:scale(.96)}
+.action-btn.active{background:#eef2ff;border-color:var(--violet);color:var(--violet);font-weight:700}
+.article-content{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow-sm)}
+.article-content h2{margin:22px 0 10px;padding-top:6px}
+.article-content h3{margin:18px 0 8px}
+.article-content p{margin:0 0 12px;font-size:16px;line-height:1.8}
+.article-content img{max-width:100%;border-radius:12px}
+.article-content blockquote{border-left:4px solid var(--violet);background:#f5f7ff;margin:16px 0;
+  padding:12px 16px;color:var(--muted);border-radius:0 10px 10px 0}
+.article-content ul,.article-content ol{padding-left:22px;line-height:1.9}
+/* 代码块：深色 + 复制按钮 */
+.code-block{margin:18px 0;border-radius:12px;overflow:hidden;background:#0f172a;box-shadow:var(--shadow-sm)}
+.code-head{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;
+  background:#1e293b;color:#94a3b8;font-size:13px}
+.copy-btn{border:1px solid #475569;background:transparent;color:#e2e8f0;border-radius:8px;
+  padding:5px 12px;cursor:pointer;font-size:13px;transition:var(--ease)}
+.copy-btn:hover{background:#334155;border-color:#64748b}
+.code-block pre{margin:0;padding:16px;overflow-x:auto}
+.code-block code{color:#e2e8f0;font:14px/1.7 ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+.article-content code:not(pre code){background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;
+  padding:2px 7px;font-size:14px;color:#be185d}
+/* 锁卡：回复可见 / 会员可见 / 积分可见 / 隐藏命令 —— 居中、圆角、轻阴影 */
+.lock-card{border:2px dashed #c7d2fe;background:linear-gradient(180deg,#f8faff,#f0f4ff);
+  border-radius:14px;padding:20px 18px;margin:18px 0;text-align:center;box-shadow:var(--shadow-sm)}
+.lock-card.lock-vip{border-color:var(--gold-2);background:linear-gradient(180deg,#fffdf4,#fff8e1)}
+.lock-card.lock-points{border-color:#fdba74;background:linear-gradient(180deg,#fffaf5,#fff7ed)}
+.lock-card.lock-hide{border-color:#d1d5db;background:#f9fafb}
+.lock-head{font-size:17px;font-weight:800;letter-spacing:.02em}
+.lock-card.lock-vip .lock-head{color:var(--gold)}
+.lock-card.lock-points .lock-head{color:#c2410c}
+.lock-hint{color:var(--muted);font-size:14px;margin:6px 0 14px;line-height:1.6}
+.lock-body{text-align:left}
+.lock-btn{padding:10px 26px;border:0;border-radius:999px;background:var(--grad);color:#fff;
+  cursor:pointer;font-size:15px;font-weight:700;box-shadow:0 4px 14px rgba(99,91,255,.35);transition:var(--ease)}
+.lock-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.lock-btn:active{transform:scale(.97)}
+.lock-card.lock-vip .lock-btn{background:linear-gradient(135deg,var(--gold-2),var(--gold));
+  box-shadow:0 4px 14px rgba(184,134,11,.35)}
+.lock-card.lock-points .lock-btn{background:linear-gradient(135deg,#fb923c,#ea580c);
+  box-shadow:0 4px 14px rgba(234,88,12,.3)}
+/* 文章图片：自适应 + 水印角标（防盗由 JS 再加右键/拖拽/长按禁用） */
+.article-img{position:relative;margin:18px 0;text-align:center}
+.article-img img{border-radius:12px;box-shadow:0 4px 16px rgba(23,28,43,.1);-webkit-user-drag:none;user-select:none}
+.article-img figcaption{color:var(--muted);font-size:13px;margin-top:8px}
+.img-wm{position:absolute;right:12px;bottom:36px;background:rgba(15,23,42,.55);color:#fff;font-size:11px;
+  padding:3px 9px;border-radius:999px;pointer-events:none}
+/* 版权说明卡片（v5 定稿）：美化自适应，内容居中，浅灰 + 金边 */
+.copyright-card{background:#f9fafb;border:1px solid var(--line);border-left:5px solid var(--gold-2);
+  border-radius:14px;padding:22px 20px;margin:28px 0;box-shadow:var(--shadow-sm)}
+.copyright-inner{max-width:640px;margin:0 auto;text-align:center}
+.copyright-title{font-size:18px;font-weight:800;color:var(--violet);margin-bottom:10px;letter-spacing:.05em}
+.copyright-inner p{margin:7px 0;font-size:14px;line-height:1.7;color:#374151}
+.copyright-inner strong{color:var(--violet)}
+@media (max-width:860px){
+  .article-content{padding:18px 16px}
+  .article-detail h1{font-size:22px}
+  .article-content p{font-size:15.5px}
+  .lock-card{padding:16px 14px}
+  .copyright-card{padding:18px 14px}
+}
